@@ -1,39 +1,31 @@
-package com.espe.distribuidas.pmaldito.jclient;
+package com.espe.distribuidas.pmaldito.jclient.controler;
+import com.espe.distribuidas.pmaldito.jclient.TelnetClientExample;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.FileOutputStream;
 import org.apache.commons.net.telnet.EchoOptionHandler;
 import org.apache.commons.net.telnet.InvalidTelnetOptionException;
 import org.apache.commons.net.telnet.SuppressGAOptionHandler;
 import org.apache.commons.net.telnet.TelnetClient;
 import org.apache.commons.net.telnet.TelnetNotificationHandler;
 import org.apache.commons.net.telnet.TerminalTypeOptionHandler;
-
-public class TelnetClientExample implements Runnable, TelnetNotificationHandler{
+public class conexion extends javax.swing.JFrame implements Runnable, TelnetNotificationHandler{
     static TelnetClient tc = null;
-    public static void main(String[] args) throws Exception
-    {
-        String remoteip = "localhost";
-        int remoteport = 4420;
-        tc = new TelnetClient();
-
+    private String remoteip;
+    private int remoteport;
+    public void conn(String remoteip,int remoteport) throws InvalidTelnetOptionException{
+        //remoteip ="localhost";
+        //remoteport =4420;
         TerminalTypeOptionHandler ttopt = new TerminalTypeOptionHandler("VT100", false, false, true, false);
         EchoOptionHandler echoopt = new EchoOptionHandler(true, false, true, false);
         SuppressGAOptionHandler gaopt = new SuppressGAOptionHandler(true, true, true, true);
-        try{
+        tc = new TelnetClient();
             tc.addOptionHandler(ttopt);
             tc.addOptionHandler(echoopt);
             tc.addOptionHandler(gaopt);
-        }
-        catch (InvalidTelnetOptionException e){
-            System.err.println("Error registering option handlers: " + e.getMessage());
-        }
-
         while (true){
             boolean end_loop = false;
-            try
-            {
+            try{
                 tc.connect(remoteip, remoteport);
                 Thread reader = new Thread (new TelnetClientExample());
                 tc.registerNotifHandler(new TelnetClientExample());
@@ -100,10 +92,9 @@ public class TelnetClientExample implements Runnable, TelnetNotificationHandler{
         }
         System.out.println("Received " + command + " for option code " + option_code);
    }
-    @Override
+//    @Override
     public void run(){
         InputStream instr = tc.getInputStream();
-        
         try{
             byte[] buff = new byte[1024];
             int ret_read = 0;
@@ -124,5 +115,5 @@ public class TelnetClientExample implements Runnable, TelnetNotificationHandler{
         catch (IOException e){
             System.err.println("Exception while closing telnet:" + e.getMessage());
         }
-    }   
+    }      
 }
