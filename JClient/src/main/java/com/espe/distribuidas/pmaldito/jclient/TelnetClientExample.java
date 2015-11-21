@@ -9,14 +9,14 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.FileOutputStream;
 import java.util.StringTokenizer;
-
+import org.apache.commons.net.telnet.EchoOptionHandler;
+import org.apache.commons.net.telnet.InvalidTelnetOptionException;
+import org.apache.commons.net.telnet.SimpleOptionHandler;
+import org.apache.commons.net.telnet.SuppressGAOptionHandler;
 import org.apache.commons.net.telnet.TelnetClient;
 import org.apache.commons.net.telnet.TelnetNotificationHandler;
-import org.apache.commons.net.telnet.SimpleOptionHandler;
-import org.apache.commons.net.telnet.EchoOptionHandler;
 import org.apache.commons.net.telnet.TerminalTypeOptionHandler;
-import org.apache.commons.net.telnet.SuppressGAOptionHandler;
-import org.apache.commons.net.telnet.InvalidTelnetOptionException;
+
 /**
  *
  * @author Luig Rocha
@@ -31,7 +31,7 @@ public class TelnetClientExample implements Runnable, TelnetNotificationHandler{
     public static void main(String[] args) throws Exception
     {
         FileOutputStream fout = null;
-        String remoteip = "192.168.137.200";
+        String remoteip = "localhost";
         int remoteport = 4420;
    
 
