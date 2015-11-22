@@ -5,6 +5,7 @@ import com.espe.distribuidas.pmaldito.jclient.controler.ClienteSocket;
 import com.espe.distribuidas.pmaldito.originador.Originador;
 import com.espe.distribuidas.pmaldito.pcs.Mensaje;
 import com.espe.distribuidas.pmaldito.pcs.MensajeRQ;
+import com.espe.distribuidas.pmaldito.producto.InformacionProductoRQ;
 import javax.swing.ImageIcon;
 public class IngresarFactura extends javax.swing.JFrame {
     private ClienteSocket cliente;
@@ -131,6 +132,11 @@ public class IngresarFactura extends javax.swing.JFrame {
         btnbuspro.setBackground(new java.awt.Color(51, 153, 255));
         btnbuspro.setForeground(new java.awt.Color(255, 255, 255));
         btnbuspro.setText("Buscar");
+        btnbuspro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnbusproActionPerformed(evt);
+            }
+        });
 
         tareaPro.setForeground(new java.awt.Color(102, 102, 102));
         tareaPro.setText("Busqueda de productos");
@@ -327,13 +333,24 @@ public class IngresarFactura extends javax.swing.JFrame {
 
     private void txtbuscliFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtbuscliFocusGained
         // TODO add your handling code here:
-        txtbuscli.setText(null);
+        //txtbuscli.setText(null);
     }//GEN-LAST:event_txtbuscliFocusGained
 
     private void txtbuscliFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtbuscliFocusLost
         // TODO add your handling code here:
-        txtbuscli.setText("Ingrese ID CLIENTE");
+       // txtbuscli.setText("Ingrese ID CLIENTE");
     }//GEN-LAST:event_txtbuscliFocusLost
+
+    private void btnbusproActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbusproActionPerformed
+        // TODO add your handling code here:
+        InformacionProductoRQ inf = new InformacionProductoRQ();
+        inf.setValor(tareaPro.getText());
+        MensajeRQ rq=new MensajeRQ(Originador.getOriginador(Originador.CLIENTE), Mensaje.INFO_PRODUCT);
+        rq.setCuerpo(inf);
+        cliente.flujo(rq.asTexto());
+        
+        tareaCli.setText(cliente.flujoRSc());
+    }//GEN-LAST:event_btnbusproActionPerformed
 
     /**
      * @param args the command line arguments

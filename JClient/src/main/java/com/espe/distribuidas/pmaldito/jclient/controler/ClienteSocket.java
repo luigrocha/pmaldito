@@ -48,7 +48,7 @@ public class ClienteSocket {
     public boolean flujoRS(){
         try {
            
-            System.out.println("Mensaje desde Cliente: ");
+            System.out.println("Mensaje desde Servidor: ");
             String trama=input.readUTF();
             if(Mensaje.validaHash(trama)){
                if("OK".equals(trama.substring(85))){
@@ -65,11 +65,14 @@ public class ClienteSocket {
     }
     public String flujoRSc(){
         try {
-            System.out.println("Mensaje desde Cliente:");
+            System.out.println("Mensaje desde INFOCLIENTE:");
+            output.flush();
             String trama=input.readUTF();
+            System.out.println("INFO CLIENTE...." + trama);
             if(Mensaje.validaHash(trama)){
-               if("OK".equals(trama.substring(85))){
-            JOptionPane.showMessageDialog(null, "Ingreso Correcto");
+               if("OKO".equals(trama.substring(85,88))){
+                   
+            JOptionPane.showMessageDialog(null, "Se recibio");
             return trama;
                } 
            }   
