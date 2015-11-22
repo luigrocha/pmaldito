@@ -22,9 +22,9 @@ public class Loading  extends javax.swing.JFrame implements Runnable  {
         try {       
             t.sleep(1800);
             this.dispose();
-            LoginView conexion = new LoginView();
-            conexion.setLocationRelativeTo(null);
-            conexion.setVisible(true);
+           Login login = new Login();
+            login.setLocationRelativeTo(null);
+            login.setVisible(true);
             
         } catch (InterruptedException ex) {
             Logger.getLogger(Loading.class.getName()).log(Level.SEVERE, null, ex);
