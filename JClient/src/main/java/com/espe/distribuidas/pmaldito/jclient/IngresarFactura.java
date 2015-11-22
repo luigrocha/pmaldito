@@ -7,6 +7,8 @@ public class IngresarFactura extends javax.swing.JFrame {
      * Creates new form IngresarFactura
      */
     public IngresarFactura() {
+        setUndecorated(true);
+        setOpacity(0.95f);
         initComponents();
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(new java.awt.Color(255,255,255));
@@ -26,9 +28,15 @@ public class IngresarFactura extends javax.swing.JFrame {
         jpnClientes = new javax.swing.JPanel();
         txtbuscli = new javax.swing.JTextField();
         btnbuscli = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtacli = new javax.swing.JTextArea();
+        btnuevo = new javax.swing.JButton();
         jpnProductos = new javax.swing.JPanel();
         btnbuspro = new javax.swing.JButton();
         txtbuspro = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea2 = new javax.swing.JTextArea();
+        btnbuspro1 = new javax.swing.JButton();
         jpnFacturacion = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -38,15 +46,37 @@ public class IngresarFactura extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTextArea3 = new javax.swing.JTextArea();
+        btnbuscli2 = new javax.swing.JButton();
+        btnbuscli3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jpnClientes.setBackground(new java.awt.Color(255, 255, 255));
         jpnClientes.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Clientes", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(204, 204, 255))); // NOI18N
 
+        txtbuscli.setForeground(new java.awt.Color(153, 153, 153));
         txtbuscli.setText("Busqueda de clientes");
 
+        btnbuscli.setBackground(new java.awt.Color(51, 102, 255));
+        btnbuscli.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnbuscli.setForeground(new java.awt.Color(255, 255, 255));
         btnbuscli.setText("Buscar");
+
+        txtacli.setColumns(20);
+        txtacli.setRows(5);
+        jScrollPane1.setViewportView(txtacli);
+
+        btnuevo.setBackground(new java.awt.Color(51, 255, 51));
+        btnuevo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnuevo.setForeground(new java.awt.Color(255, 255, 255));
+        btnuevo.setText("Nuevo");
+        btnuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnuevoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jpnClientesLayout = new javax.swing.GroupLayout(jpnClientes);
         jpnClientes.setLayout(jpnClientesLayout);
@@ -54,10 +84,14 @@ public class IngresarFactura extends javax.swing.JFrame {
             jpnClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnClientesLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addComponent(txtbuscli, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnbuscli)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jpnClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtbuscli)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jpnClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnbuscli)
+                    .addComponent(btnuevo))
+                .addGap(32, 32, 32))
         );
         jpnClientesLayout.setVerticalGroup(
             jpnClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -66,26 +100,48 @@ public class IngresarFactura extends javax.swing.JFrame {
                 .addGroup(jpnClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtbuscli, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnbuscli))
-                .addContainerGap(140, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jpnClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnuevo)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jpnProductos.setBackground(new java.awt.Color(255, 255, 255));
         jpnProductos.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Productos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(204, 204, 0))); // NOI18N
 
+        btnbuspro.setBackground(new java.awt.Color(51, 102, 255));
+        btnbuspro.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnbuspro.setForeground(new java.awt.Color(255, 255, 255));
         btnbuspro.setText("Buscar");
 
+        txtbuspro.setForeground(new java.awt.Color(102, 102, 102));
         txtbuspro.setText("Busqueda de productos");
+
+        jTextArea2.setColumns(20);
+        jTextArea2.setRows(5);
+        jScrollPane2.setViewportView(jTextArea2);
+
+        btnbuspro1.setBackground(new java.awt.Color(51, 255, 51));
+        btnbuspro1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnbuspro1.setForeground(new java.awt.Color(255, 255, 255));
+        btnbuspro1.setText("Nuevo");
+        btnbuspro1.setEnabled(false);
 
         javax.swing.GroupLayout jpnProductosLayout = new javax.swing.GroupLayout(jpnProductos);
         jpnProductos.setLayout(jpnProductosLayout);
         jpnProductosLayout.setHorizontalGroup(
             jpnProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnProductosLayout.createSequentialGroup()
+            .addGroup(jpnProductosLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addComponent(txtbuspro, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnbuspro)
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addGroup(jpnProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtbuspro)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jpnProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnbuspro)
+                    .addComponent(btnbuspro1))
+                .addGap(33, 33, 33))
         );
         jpnProductosLayout.setVerticalGroup(
             jpnProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -94,10 +150,17 @@ public class IngresarFactura extends javax.swing.JFrame {
                 .addGroup(jpnProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtbuspro, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnbuspro))
-                .addContainerGap(151, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jpnProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpnProductosLayout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+                        .addGap(10, 10, 10))
+                    .addGroup(jpnProductosLayout.createSequentialGroup()
+                        .addComponent(btnbuspro1)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
-        jpnFacturacion.setBackground(new java.awt.Color(204, 255, 255));
+        jpnFacturacion.setBackground(new java.awt.Color(255, 255, 255));
         jpnFacturacion.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Facturación", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(0, 0, 204))); // NOI18N
 
         jLabel1.setText("Nombre:");
@@ -116,6 +179,25 @@ public class IngresarFactura extends javax.swing.JFrame {
 
         jLabel8.setText("Birth day:");
 
+        jTextArea3.setColumns(20);
+        jTextArea3.setRows(5);
+        jScrollPane3.setViewportView(jTextArea3);
+
+        btnbuscli2.setBackground(new java.awt.Color(255, 51, 51));
+        btnbuscli2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnbuscli2.setForeground(new java.awt.Color(255, 255, 255));
+        btnbuscli2.setText("Guardar");
+
+        btnbuscli3.setBackground(new java.awt.Color(102, 102, 102));
+        btnbuscli3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnbuscli3.setForeground(new java.awt.Color(255, 255, 255));
+        btnbuscli3.setText("Cancelar");
+        btnbuscli3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnbuscli3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jpnFacturacionLayout = new javax.swing.GroupLayout(jpnFacturacion);
         jpnFacturacion.setLayout(jpnFacturacionLayout);
         jpnFacturacionLayout.setHorizontalGroup(
@@ -123,17 +205,28 @@ public class IngresarFactura extends javax.swing.JFrame {
             .addGroup(jpnFacturacionLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jpnFacturacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 248, Short.MAX_VALUE)
-                .addGroup(jpnFacturacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel8))
-                .addGap(207, 207, 207))
+                    .addGroup(jpnFacturacionLayout.createSequentialGroup()
+                        .addGroup(jpnFacturacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 248, Short.MAX_VALUE)
+                        .addGroup(jpnFacturacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8))
+                        .addGap(207, 207, 207))
+                    .addGroup(jpnFacturacionLayout.createSequentialGroup()
+                        .addComponent(jScrollPane3)
+                        .addContainerGap())))
+            .addGroup(jpnFacturacionLayout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addComponent(btnbuscli2, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnbuscli3, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(66, 66, 66))
         );
         jpnFacturacionLayout.setVerticalGroup(
             jpnFacturacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -154,7 +247,13 @@ public class IngresarFactura extends javax.swing.JFrame {
                 .addGroup(jpnFacturacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jLabel8))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jpnFacturacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnbuscli2)
+                    .addComponent(btnbuscli3))
+                .addGap(23, 23, 23))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -163,28 +262,39 @@ public class IngresarFactura extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jpnProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jpnClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(30, 30, 30)
-                .addComponent(jpnFacturacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jpnClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jpnProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jpnFacturacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jpnFacturacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jpnClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jpnProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(36, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jpnProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnbuscli3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscli3ActionPerformed
+        // TODO add your handling code here:
+        System.exit(1);
+    }//GEN-LAST:event_btnbuscli3ActionPerformed
+
+    private void btnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnuevoActionPerformed
+        // TODO add your handling code here:
+        IngresarCliente ingcli = new IngresarCliente();
+        this.setVisible(false);
+        ingcli.setVisible(true);
+        
+    }//GEN-LAST:event_btnuevoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -223,7 +333,11 @@ public class IngresarFactura extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnbuscli;
+    private javax.swing.JButton btnbuscli2;
+    private javax.swing.JButton btnbuscli3;
     private javax.swing.JButton btnbuspro;
+    private javax.swing.JButton btnbuspro1;
+    private javax.swing.JButton btnuevo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -232,9 +346,15 @@ public class IngresarFactura extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JTextArea jTextArea3;
     private javax.swing.JPanel jpnClientes;
     private javax.swing.JPanel jpnFacturacion;
     private javax.swing.JPanel jpnProductos;
+    private javax.swing.JTextArea txtacli;
     private javax.swing.JTextField txtbuscli;
     private javax.swing.JTextField txtbuspro;
     // End of variables declaration//GEN-END:variables
