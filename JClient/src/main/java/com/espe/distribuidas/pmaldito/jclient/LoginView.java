@@ -3,8 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.espe.distribuidas.pmaldito.jclient.controler;
+package com.espe.distribuidas.pmaldito.jclient;
 
+import com.espe.distribuidas.pmaldito.jclient.controler.ClienteSocket;
+import com.espe.distribuidas.pmaldito.jclient.controler.SendRQ;
+import com.espe.distribuidas.pmaldito.jclient.controler.Usuario;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -17,14 +20,14 @@ import javax.swing.ImageIcon;
  *
  * @author david
  */
-public class ventana extends javax.swing.JFrame {
+public class LoginView extends javax.swing.JFrame {
     
     private ClienteSocket cliente;
 
     /**
      * Creates new form ventana
      */
-    public ventana() {
+    public LoginView() {
         setUndecorated(true);
         setOpacity(0.95f);
         initComponents();
@@ -36,7 +39,7 @@ public class ventana extends javax.swing.JFrame {
             cliente = new ClienteSocket();
             cliente.conexio();
         } catch (IOException ex) {
-            Logger.getLogger(ventana.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LoginView.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -67,7 +70,7 @@ public class ventana extends javax.swing.JFrame {
 
         btncerrar.setBackground(new java.awt.Color(255, 0, 0));
         btncerrar.setForeground(new java.awt.Color(255, 255, 255));
-        btncerrar.setText("X");
+        btncerrar.setText("Cerrar");
         btncerrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btncerrarActionPerformed(evt);
@@ -82,24 +85,23 @@ public class ventana extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(131, 131, 131)
-                .addComponent(btnenviar)
-                .addGap(18, 18, 18)
-                .addComponent(btncerrar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtusuario, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                        .addComponent(txtusuario, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(81, 81, 81))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnenviar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btncerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -116,7 +118,7 @@ public class ventana extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnenviar)
                     .addComponent(btncerrar))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -124,9 +126,14 @@ public class ventana extends javax.swing.JFrame {
 
     private void btnenviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnenviarActionPerformed
         // TODO add your handling code here:
-        String mensaje = txtClave.getText();
-        mensaje+=txtusuario.getText();
-        cliente.flujo(mensaje);
+        SendRQ send = new SendRQ();
+        cliente.flujo(send.construirMs(new Usuario(txtusuario.getText(),txtClave.getText())));
+        if(cliente.flujoRS()){
+            this.setVisible(false);
+            IngresarFactura fact = new IngresarFactura();
+            fact.setVisible(true);
+        }
+        
     }//GEN-LAST:event_btnenviarActionPerformed
 
     private void btncerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncerrarActionPerformed
@@ -153,21 +160,23 @@ public class ventana extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ventana.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ventana.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ventana.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ventana.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ventana().setVisible(true);
+                new LoginView().setVisible(true);
             }
         });
     }
