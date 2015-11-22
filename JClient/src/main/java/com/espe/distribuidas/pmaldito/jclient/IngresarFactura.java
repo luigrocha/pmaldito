@@ -1,18 +1,23 @@
 package com.espe.distribuidas.pmaldito.jclient;
 
+import com.espe.distribuidas.pmaldito.jclient.controler.ClienteSocket;
 import javax.swing.ImageIcon;
 public class IngresarFactura extends javax.swing.JFrame {
+    private ClienteSocket cliente;
 
     /**
      * Creates new form IngresarFactura
      */
     public IngresarFactura() {
         initComponents();
+        
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(new java.awt.Color(255,255,255));
         ImageIcon imageIcon = new ImageIcon(this.getClass().getResource("/org/freedesktop/tango/22x22/actions/address-book-new.png"));
         this.setIconImage(imageIcon.getImage());
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -53,14 +58,19 @@ public class IngresarFactura extends javax.swing.JFrame {
         jpnClientes.setBackground(new java.awt.Color(255, 255, 255));
         jpnClientes.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Clientes", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(204, 204, 255))); // NOI18N
 
+        txtbuscli.setForeground(new java.awt.Color(102, 102, 102));
         txtbuscli.setText("Busqueda de clientes");
 
+        btnbuscli.setBackground(new java.awt.Color(51, 153, 255));
+        btnbuscli.setForeground(new java.awt.Color(255, 255, 255));
         btnbuscli.setText("Buscar");
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
+        btnbuscli1.setBackground(new java.awt.Color(0, 255, 0));
+        btnbuscli1.setForeground(new java.awt.Color(255, 255, 255));
         btnbuscli1.setText("Nuevo");
         btnbuscli1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -100,14 +110,19 @@ public class IngresarFactura extends javax.swing.JFrame {
         jpnProductos.setBackground(new java.awt.Color(255, 255, 255));
         jpnProductos.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Productos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(204, 204, 0))); // NOI18N
 
+        btnbuspro.setBackground(new java.awt.Color(51, 153, 255));
+        btnbuspro.setForeground(new java.awt.Color(255, 255, 255));
         btnbuspro.setText("Buscar");
 
+        txtbuspro.setForeground(new java.awt.Color(102, 102, 102));
         txtbuspro.setText("Busqueda de productos");
 
         jTextArea2.setColumns(20);
         jTextArea2.setRows(5);
         jScrollPane2.setViewportView(jTextArea2);
 
+        btnbuscli2.setBackground(new java.awt.Color(0, 255, 0));
+        btnbuscli2.setForeground(new java.awt.Color(255, 255, 255));
         btnbuscli2.setText("Nuevo");
 
         javax.swing.GroupLayout jpnProductosLayout = new javax.swing.GroupLayout(jpnProductos);
@@ -160,9 +175,20 @@ public class IngresarFactura extends javax.swing.JFrame {
         jTextArea3.setRows(5);
         jScrollPane3.setViewportView(jTextArea3);
 
+        btnbuscli3.setBackground(new java.awt.Color(51, 255, 0));
+        btnbuscli3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnbuscli3.setForeground(new java.awt.Color(255, 255, 255));
         btnbuscli3.setText("Guardar");
 
+        btnbuscli4.setBackground(new java.awt.Color(255, 51, 51));
+        btnbuscli4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnbuscli4.setForeground(new java.awt.Color(255, 255, 255));
         btnbuscli4.setText("Cancelar");
+        btnbuscli4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnbuscli4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jpnFacturacionLayout = new javax.swing.GroupLayout(jpnFacturacion);
         jpnFacturacion.setLayout(jpnFacturacionLayout);
@@ -188,10 +214,10 @@ public class IngresarFactura extends javax.swing.JFrame {
                         .addContainerGap())))
             .addGroup(jpnFacturacionLayout.createSequentialGroup()
                 .addGap(106, 106, 106)
-                .addComponent(btnbuscli3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnbuscli4)
-                .addGap(139, 139, 139))
+                .addComponent(btnbuscli3, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnbuscli4, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jpnFacturacionLayout.setVerticalGroup(
             jpnFacturacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -250,9 +276,15 @@ public class IngresarFactura extends javax.swing.JFrame {
     private void btnbuscli1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscli1ActionPerformed
         // TODO add your handling code here:
         IngresarCliente ingcli= new IngresarCliente();
+        ingcli.setCliente(cliente);
         ingcli.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnbuscli1ActionPerformed
+
+    private void btnbuscli4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscli4ActionPerformed
+        // TODO add your handling code here:
+        System.exit(1);
+    }//GEN-LAST:event_btnbuscli4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -315,4 +347,12 @@ public class IngresarFactura extends javax.swing.JFrame {
     private javax.swing.JTextField txtbuscli;
     private javax.swing.JTextField txtbuspro;
     // End of variables declaration//GEN-END:variables
+
+    public ClienteSocket getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(ClienteSocket cliente) {
+        this.cliente = cliente;
+    }
 }

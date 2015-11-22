@@ -23,7 +23,7 @@ import javax.swing.JOptionPane;
  */
 public class LoginView extends javax.swing.JFrame {
     
-    private ClienteSocket cliente;
+    public ClienteSocket cliente;
 
     /**
      * Creates new form ventana
@@ -62,7 +62,12 @@ public class LoginView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnenviar.setText("Enviar");
+        txtClave.setText("ROCHA");
+
+        btnenviar.setBackground(new java.awt.Color(51, 255, 0));
+        btnenviar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnenviar.setForeground(new java.awt.Color(255, 255, 255));
+        btnenviar.setText("Ingresar");
         btnenviar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnenviarActionPerformed(evt);
@@ -70,6 +75,7 @@ public class LoginView extends javax.swing.JFrame {
         });
 
         btncerrar.setBackground(new java.awt.Color(255, 0, 0));
+        btncerrar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btncerrar.setForeground(new java.awt.Color(255, 255, 255));
         btncerrar.setText("Cerrar");
         btncerrar.addActionListener(new java.awt.event.ActionListener() {
@@ -78,8 +84,12 @@ public class LoginView extends javax.swing.JFrame {
             }
         });
 
+        txtusuario.setText("LUIG");
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Usuario");
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Clave");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -132,6 +142,7 @@ public class LoginView extends javax.swing.JFrame {
         if(cliente.flujoRS()){
             this.setVisible(false);
             IngresarFactura fact = new IngresarFactura();
+            fact.setCliente(cliente);
             fact.setVisible(true);
         }else{
             JOptionPane.showMessageDialog(null, "Error, intente nuevamente");

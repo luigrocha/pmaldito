@@ -1,7 +1,17 @@
 package com.espe.distribuidas.pmaldito.jclient;
 
+import com.espe.distribuidas.pmaldito.cliente.IngresarClienteRQ;
+import com.espe.distribuidas.pmaldito.jclient.controler.Cliente;
+import com.espe.distribuidas.pmaldito.jclient.controler.ClienteSocket;
+import com.espe.distribuidas.pmaldito.jclient.controler.SendRQ;
+import com.espe.distribuidas.pmaldito.jclient.controler.Usuario;
+import com.espe.distribuidas.pmaldito.originador.Originador;
+import com.espe.distribuidas.pmaldito.pcs.Mensaje;
+import com.espe.distribuidas.pmaldito.pcs.MensajeRQ;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 public class IngresarCliente extends javax.swing.JFrame {
+    private ClienteSocket cliente;
 
     /**
      * Creates new form IngresarFactura
@@ -12,8 +22,10 @@ public class IngresarCliente extends javax.swing.JFrame {
         this.getContentPane().setBackground(new java.awt.Color(255,255,255));
         ImageIcon imageIcon = new ImageIcon(this.getClass().getResource("/org/freedesktop/tango/22x22/actions/address-book-new.png"));
         this.setIconImage(imageIcon.getImage());
+        
     }
 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -24,7 +36,7 @@ public class IngresarCliente extends javax.swing.JFrame {
     private void initComponents() {
 
         jpnClientes = new javax.swing.JPanel();
-        txtbuscli = new javax.swing.JTextField();
+        txtnom = new javax.swing.JTextField();
         btnbuscli = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -34,25 +46,40 @@ public class IngresarCliente extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        txtbuscli1 = new javax.swing.JTextField();
-        txtbuscli2 = new javax.swing.JTextField();
-        txtbuscli3 = new javax.swing.JTextField();
-        txtbuscli4 = new javax.swing.JTextField();
-        txtbuscli5 = new javax.swing.JTextField();
-        txtbuscli6 = new javax.swing.JTextField();
+        txtape = new javax.swing.JTextField();
+        txtval = new javax.swing.JTextField();
+        txtdir = new javax.swing.JTextField();
+        txttef = new javax.swing.JTextField();
+        txtcel = new javax.swing.JTextField();
+        txtcorr = new javax.swing.JTextField();
         btnbuscli1 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
-        jComboBox2 = new javax.swing.JComboBox();
-        jComboBox3 = new javax.swing.JComboBox();
-        jComboBox4 = new javax.swing.JComboBox();
+        jtipo = new javax.swing.JComboBox();
+        jdia = new javax.swing.JComboBox();
+        jmes = new javax.swing.JComboBox();
+        janio = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jpnClientes.setBackground(new java.awt.Color(255, 255, 255));
-        jpnClientes.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Clientes", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(204, 204, 255))); // NOI18N
+        jpnClientes.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Clientes", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 18), new java.awt.Color(51, 102, 255))); // NOI18N
 
+        txtnom.setText("JUANITO");
+
+        btnbuscli.setBackground(new java.awt.Color(51, 255, 0));
+        btnbuscli.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnbuscli.setForeground(new java.awt.Color(255, 255, 255));
         btnbuscli.setText("Guardar");
+        btnbuscli.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnbuscliMouseClicked(evt);
+            }
+        });
+        btnbuscli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnbuscliActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Nombre:");
 
@@ -70,6 +97,21 @@ public class IngresarCliente extends javax.swing.JFrame {
 
         jLabel8.setText("Birth day:");
 
+        txtape.setText("PEREZ");
+
+        txtval.setText("1725412306");
+
+        txtdir.setText("SOLCA");
+
+        txttef.setText("22483313");
+
+        txtcel.setText("0998299109");
+
+        txtcorr.setText("luigrocha@gmail.com");
+
+        btnbuscli1.setBackground(new java.awt.Color(255, 51, 51));
+        btnbuscli1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnbuscli1.setForeground(new java.awt.Color(255, 255, 255));
         btnbuscli1.setText("Cancelar");
         btnbuscli1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,13 +121,13 @@ public class IngresarCliente extends javax.swing.JFrame {
 
         jLabel9.setText("Tipo Doc:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "PASSP", "CEDUL.RUC" }));
+        jtipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "PASSP", "CEDUL", "RUC" }));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+        jdia.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
+        jmes.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1991", "1992", "1993", "1994", "1995", "1996" }));
+        janio.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1991", "1992", "1993", "1994", "1995", "1996" }));
 
         javax.swing.GroupLayout jpnClientesLayout = new javax.swing.GroupLayout(jpnClientes);
         jpnClientes.setLayout(jpnClientesLayout);
@@ -100,8 +142,8 @@ public class IngresarCliente extends javax.swing.JFrame {
                             .addComponent(jLabel2))
                         .addGap(18, 18, 18)
                         .addGroup(jpnClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtbuscli1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtbuscli, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtape, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtnom, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpnClientesLayout.createSequentialGroup()
                         .addGroup(jpnClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jpnClientesLayout.createSequentialGroup()
@@ -122,23 +164,24 @@ public class IngresarCliente extends javax.swing.JFrame {
                                     .addComponent(jLabel9))))
                         .addGap(18, 18, 18)
                         .addGroup(jpnClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtbuscli2)
-                            .addComponent(txtbuscli3)
-                            .addComponent(txtbuscli5)
-                            .addComponent(txtbuscli4)
-                            .addComponent(txtbuscli6)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtval)
+                            .addComponent(txtdir)
+                            .addComponent(txtcel)
+                            .addComponent(txttef)
+                            .addComponent(txtcorr)
+                            .addComponent(jtipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jpnClientesLayout.createSequentialGroup()
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jdia, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jmes, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox4, 0, 80, Short.MAX_VALUE))))
+                                .addComponent(janio, 0, 80, Short.MAX_VALUE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpnClientesLayout.createSequentialGroup()
-                        .addGap(53, 53, 53)
+                        .addGap(33, 33, 33)
                         .addComponent(btnbuscli, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnbuscli1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(btnbuscli1, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
+                        .addGap(20, 20, 20)))
                 .addGap(17, 17, 17))
         );
         jpnClientesLayout.setVerticalGroup(
@@ -146,42 +189,42 @@ public class IngresarCliente extends javax.swing.JFrame {
             .addGroup(jpnClientesLayout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addGroup(jpnClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtbuscli, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtnom, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpnClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtbuscli1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtape, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jpnClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jpnClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtbuscli2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtval, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpnClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtbuscli3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtdir, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpnClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtbuscli4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txttef, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addGap(3, 3, 3)
                 .addGroup(jpnClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtbuscli5, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtcel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpnClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtbuscli6, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtcorr, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpnClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jdia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jmes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(janio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addGroup(jpnClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnbuscli)
@@ -211,6 +254,53 @@ public class IngresarCliente extends javax.swing.JFrame {
         IngresarFactura fact= new IngresarFactura();
         fact.setVisible(true);
     }//GEN-LAST:event_btnbuscli1ActionPerformed
+
+    private void btnbuscliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscliActionPerformed
+        // TODO add your handling code here:
+         //SendRQ send = new SendRQ();
+        IngresarClienteRQ aurq=new IngresarClienteRQ();
+        aurq.setTipoDocumento("CEDUL");
+        aurq.setValorDocumento(txtval.getText());
+        aurq.setNombre(txtnom.getText());
+        aurq.setApellido(txtape.getText());
+        aurq.setDireccion(txtdir.getText());
+        aurq.setNumeroTelefono(txttef.getText());
+        aurq.setNumeroMovil(txtcel.getText());
+        aurq.setCorreo(txtcorr.getText());
+        aurq.setFechaNacimiento("20150107");
+        MensajeRQ rq=new MensajeRQ(Originador.getOriginador(Originador.CLIENTE), Mensaje.INSERT_CLIENT);
+        rq.setCuerpo(aurq);
+        cliente.flujo(rq.asTexto());
+        
+        if(cliente.flujoRS()){
+           /* this.setVisible(false);
+            IngresarFactura fact = new IngresarFactura();
+            fact.setVisible(true);*/
+        }else{
+            JOptionPane.showMessageDialog(null, "Error, intente nuevamente");
+        }
+        
+    }//GEN-LAST:event_btnbuscliActionPerformed
+
+    private void btnbuscliMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnbuscliMouseClicked
+        // TODO add your handling code here:
+        IngresarClienteRQ aurq=new IngresarClienteRQ();
+        aurq.setTipoDocumento("CEDUL");
+        aurq.setValorDocumento(txtval.getText());
+        aurq.setNombre(txtnom.getText());
+        aurq.setApellido(txtape.getText());
+        aurq.setDireccion(txtdir.getText());
+        aurq.setNumeroTelefono(txttef.getText());
+        aurq.setNumeroMovil(txtcel.getText());
+        aurq.setCorreo(txtcorr.getText());
+        aurq.setFechaNacimiento("2015-01-07");
+        MensajeRQ rq=new MensajeRQ(Originador.getOriginador(Originador.CLIENTE), Mensaje.AUTENTIC_USER);
+        rq.setCuerpo(aurq);
+        System.out.print(rq.asTexto());
+        cliente.flujo(rq.asTexto());
+        
+        
+    }//GEN-LAST:event_btnbuscliMouseClicked
 
     /**
      * @param args the command line arguments
@@ -251,10 +341,6 @@ public class IngresarCliente extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnbuscli;
     private javax.swing.JButton btnbuscli1;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox2;
-    private javax.swing.JComboBox jComboBox3;
-    private javax.swing.JComboBox jComboBox4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -264,13 +350,25 @@ public class IngresarCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JComboBox janio;
+    private javax.swing.JComboBox jdia;
+    private javax.swing.JComboBox jmes;
     private javax.swing.JPanel jpnClientes;
-    private javax.swing.JTextField txtbuscli;
-    private javax.swing.JTextField txtbuscli1;
-    private javax.swing.JTextField txtbuscli2;
-    private javax.swing.JTextField txtbuscli3;
-    private javax.swing.JTextField txtbuscli4;
-    private javax.swing.JTextField txtbuscli5;
-    private javax.swing.JTextField txtbuscli6;
+    private javax.swing.JComboBox jtipo;
+    private javax.swing.JTextField txtape;
+    private javax.swing.JTextField txtcel;
+    private javax.swing.JTextField txtcorr;
+    private javax.swing.JTextField txtdir;
+    private javax.swing.JTextField txtnom;
+    private javax.swing.JTextField txttef;
+    private javax.swing.JTextField txtval;
     // End of variables declaration//GEN-END:variables
+
+    public ClienteSocket getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(ClienteSocket cliente) {
+        this.cliente = cliente;
+    }
 }
