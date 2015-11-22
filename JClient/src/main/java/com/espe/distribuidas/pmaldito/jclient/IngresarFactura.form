@@ -109,6 +109,10 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Busqueda de clientes"/>
           </Properties>
+          <Events>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtbuscliFocusGained"/>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtbuscliFocusLost"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnbuscli">
           <Properties>

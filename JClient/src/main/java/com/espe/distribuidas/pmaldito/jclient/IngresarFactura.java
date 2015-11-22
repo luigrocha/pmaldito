@@ -65,6 +65,14 @@ public class IngresarFactura extends javax.swing.JFrame {
 
         txtbuscli.setForeground(new java.awt.Color(102, 102, 102));
         txtbuscli.setText("Busqueda de clientes");
+        txtbuscli.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtbuscliFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtbuscliFocusLost(evt);
+            }
+        });
 
         btnbuscli.setBackground(new java.awt.Color(51, 153, 255));
         btnbuscli.setForeground(new java.awt.Color(255, 255, 255));
@@ -316,6 +324,16 @@ public class IngresarFactura extends javax.swing.JFrame {
         tareaCli.setText(cliente.flujoRSc());
         
     }//GEN-LAST:event_btnbuscliActionPerformed
+
+    private void txtbuscliFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtbuscliFocusGained
+        // TODO add your handling code here:
+        txtbuscli.setText(null);
+    }//GEN-LAST:event_txtbuscliFocusGained
+
+    private void txtbuscliFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtbuscliFocusLost
+        // TODO add your handling code here:
+        txtbuscli.setText("Ingrese ID CLIENTE");
+    }//GEN-LAST:event_txtbuscliFocusLost
 
     /**
      * @param args the command line arguments
