@@ -63,5 +63,22 @@ public class ClienteSocket {
         }
         return false;
     }
+    public String flujoRSc(){
+        try {
+            System.out.println("Mensaje desde Cliente:");
+            String trama=input.readUTF();
+            if(Mensaje.validaHash(trama)){
+               if("OK".equals(trama.substring(85))){
+            JOptionPane.showMessageDialog(null, "Ingreso Correcto");
+            return trama;
+               } 
+           }   
+        }catch (IOException ex) {
+            System.out.println("Error...." + ex);
+            JOptionPane.showMessageDialog(null, "Ingreso Incorrecto, intente nuevamente");
+            return "No hay resultados";
+        }
+        return "No hay resultados";
+    }
     
 }

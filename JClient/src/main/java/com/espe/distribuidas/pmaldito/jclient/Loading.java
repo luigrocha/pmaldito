@@ -10,7 +10,7 @@ public class Loading  extends javax.swing.JFrame implements Runnable  {
     Thread t;
     public Loading() {
         setUndecorated(true);
-        setOpacity(0.55f);
+        setOpacity(0.95f);
         initComponents();
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(new java.awt.Color(255,255,255));
