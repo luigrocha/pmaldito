@@ -15,6 +15,7 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -132,6 +133,8 @@ public class LoginView extends javax.swing.JFrame {
             this.setVisible(false);
             IngresarFactura fact = new IngresarFactura();
             fact.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(null, "Error, intente nuevamente");
         }
         
     }//GEN-LAST:event_btnenviarActionPerformed
