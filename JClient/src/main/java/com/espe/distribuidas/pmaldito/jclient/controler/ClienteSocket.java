@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
  * @author david
  */
 public class ClienteSocket {
-    private static final  String IP = "192.168.1.101";
+    private static final  String IP = "localhost";
     DataInputStream input = null;
     DataOutputStream output = null;
     Socket comunicacion = null;
@@ -63,25 +63,55 @@ public class ClienteSocket {
         }
         return false;
     }
-    public String flujoRSc(){
+    public String[] flujoRSc(){
         try {
             System.out.println("Mensaje desde INFOCLIENTE:");
             output.flush();
             String trama=input.readUTF();
             System.out.println("INFO CLIENTE...." + trama);
             if(Mensaje.validaHash(trama)){
-               if("OKO".equals(trama.substring(85,88))){
-                   
+                System.out.println("INFO CLIENTE...." + trama.substring(85,88));
+               //if("OKO".equals(trama.substring(85,88))){
+                   String [] arr1=trama.split("OKO_");
+                   String [] arr2=arr1[1].split("-");
+                   for (int i = 0; i < arr2.length; i++) {
+                       System.out.println(arr2[i]);
+                   }
             JOptionPane.showMessageDialog(null, "Se recibio");
-            return trama;
-               } 
+            return arr2;
+               //} 
            }   
         }catch (IOException ex) {
             System.out.println("Error...." + ex);
             JOptionPane.showMessageDialog(null, "Ingreso Incorrecto, intente nuevamente");
-            return "No hay resultados";
+            return null;
         }
-        return "No hay resultados";
+        return null;
+    }
+    public String[] flujoRSp(){
+        try {
+            System.out.println("Mensaje desde INFOPRODUCTO:");
+            output.flush();
+            String trama=input.readUTF();
+            System.out.println("INFO INFOPRODUCTO...." + trama);
+            if(Mensaje.validaHash(trama)){
+                System.out.println("INFO INFOPRODUCTO...." + trama.substring(85,88));
+               //if("OKO".equals(trama.substring(85,88))){
+                   String [] arr1=trama.split("OKO_");
+                   String [] arr2=arr1[1].split("-");
+                   for (int i = 0; i < arr2.length; i++) {
+                       System.out.println(arr2[i]);
+                   }
+            JOptionPane.showMessageDialog(null, "Se recibio");
+            return arr2;
+               //} 
+           }   
+        }catch (IOException ex) {
+            System.out.println("Error...." + ex);
+            JOptionPane.showMessageDialog(null, "Ingreso Incorrecto, intente nuevamente");
+            return null;
+        }
+        return null;
     }
     
 }

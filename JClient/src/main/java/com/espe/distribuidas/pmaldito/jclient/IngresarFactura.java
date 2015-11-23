@@ -7,15 +7,44 @@ import com.espe.distribuidas.pmaldito.pcs.Mensaje;
 import com.espe.distribuidas.pmaldito.pcs.MensajeRQ;
 import com.espe.distribuidas.pmaldito.producto.InformacionProductoRQ;
 import javax.swing.ImageIcon;
+import javax.swing.table.DefaultTableModel;
 public class IngresarFactura extends javax.swing.JFrame {
     private ClienteSocket cliente;
+    
+    DefaultTableModel modelo;
+    DefaultTableModel modelop;
+    DefaultTableModel modelod;
 
     /**
      * Creates new form IngresarFactura
      */
     public IngresarFactura() {
         initComponents();
-        
+        modelo= new DefaultTableModel();
+        modelo.addColumn("Tipo");
+        modelo.addColumn("Documento");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Apellido");
+        modelo.addColumn("Direccion");
+        modelo.addColumn("Telefono");
+        modelo.addColumn("Celular");
+        modelo.addColumn("Mail");
+        modelo.addColumn("Date");
+        tblDatos.setModel(modelo);
+        modelop= new DefaultTableModel();
+        modelop.addColumn("Codigo");
+        modelop.addColumn("Nombre");
+        modelop.addColumn("Cantidad");
+        modelop.addColumn("Precio");
+        tblDatosp.setModel(modelop);
+        modelod= new DefaultTableModel();
+        modelod.addColumn("Codigo");
+        modelod.addColumn("Codigof");
+        modelod.addColumn("Producto");
+        modelod.addColumn("Cantidad");
+        modelod.addColumn("Precio");
+       
+        tblDetalle.setModel(modelod);
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(new java.awt.Color(255,255,255));
         ImageIcon imageIcon = new ImageIcon(this.getClass().getResource("/org/freedesktop/tango/22x22/actions/address-book-new.png"));
@@ -36,28 +65,28 @@ public class IngresarFactura extends javax.swing.JFrame {
         jpnClientes = new javax.swing.JPanel();
         txtbuscli = new javax.swing.JTextField();
         btnbuscli = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tareaCli = new javax.swing.JTextArea();
         btnbusnuevo = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tblDatos = new javax.swing.JTable();
         jpnProductos = new javax.swing.JPanel();
         btnbuspro = new javax.swing.JButton();
-        tareaPro = new javax.swing.JTextField();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        txtbuspro = new javax.swing.JTextField();
         btnbuscli2 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblDatosp = new javax.swing.JTable();
         jpnFacturacion = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        tareaDetalle = new javax.swing.JTextArea();
+        lbNombre = new javax.swing.JLabel();
+        lbApellido = new javax.swing.JLabel();
+        lbRuc = new javax.swing.JLabel();
+        lbDireccion = new javax.swing.JLabel();
+        lbTelefono = new javax.swing.JLabel();
+        lbCelular = new javax.swing.JLabel();
+        lbCorreo = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         lbnombre = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblDetalle = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -78,15 +107,16 @@ public class IngresarFactura extends javax.swing.JFrame {
         btnbuscli.setBackground(new java.awt.Color(51, 153, 255));
         btnbuscli.setForeground(new java.awt.Color(255, 255, 255));
         btnbuscli.setText("Buscar");
+        btnbuscli.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnbuscliMouseClicked(evt);
+            }
+        });
         btnbuscli.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnbuscliActionPerformed(evt);
             }
         });
-
-        tareaCli.setColumns(20);
-        tareaCli.setRows(5);
-        jScrollPane1.setViewportView(tareaCli);
 
         btnbusnuevo.setBackground(new java.awt.Color(0, 255, 0));
         btnbusnuevo.setForeground(new java.awt.Color(255, 255, 255));
@@ -97,33 +127,52 @@ public class IngresarFactura extends javax.swing.JFrame {
             }
         });
 
+        tblDatos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tblDatos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblDatosMouseClicked(evt);
+            }
+        });
+        jScrollPane4.setViewportView(tblDatos);
+
         javax.swing.GroupLayout jpnClientesLayout = new javax.swing.GroupLayout(jpnClientes);
         jpnClientes.setLayout(jpnClientesLayout);
         jpnClientesLayout.setHorizontalGroup(
             jpnClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnClientesLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(jpnClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1)
+                .addGroup(jpnClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpnClientesLayout.createSequentialGroup()
+                        .addGap(22, 22, 22)
                         .addComponent(txtbuscli, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnbuscli)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnbusnuevo)))
-                .addContainerGap(22, Short.MAX_VALUE))
+                        .addComponent(btnbusnuevo))
+                    .addGroup(jpnClientesLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jpnClientesLayout.setVerticalGroup(
             jpnClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnClientesLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addContainerGap(21, Short.MAX_VALUE)
                 .addGroup(jpnClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtbuscli, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnbuscli)
                     .addComponent(btnbusnuevo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
-                .addGap(23, 23, 23))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jpnProductos.setBackground(new java.awt.Color(255, 255, 255));
@@ -138,67 +187,73 @@ public class IngresarFactura extends javax.swing.JFrame {
             }
         });
 
-        tareaPro.setForeground(new java.awt.Color(102, 102, 102));
-        tareaPro.setText("Busqueda de productos");
-
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPane2.setViewportView(jTextArea2);
+        txtbuspro.setForeground(new java.awt.Color(102, 102, 102));
+        txtbuspro.setText("Busqueda de productos");
 
         btnbuscli2.setBackground(new java.awt.Color(0, 255, 0));
         btnbuscli2.setForeground(new java.awt.Color(255, 255, 255));
         btnbuscli2.setText("Nuevo");
         btnbuscli2.setEnabled(false);
 
+        tblDatosp.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tblDatosp);
+
         javax.swing.GroupLayout jpnProductosLayout = new javax.swing.GroupLayout(jpnProductos);
         jpnProductos.setLayout(jpnProductosLayout);
         jpnProductosLayout.setHorizontalGroup(
             jpnProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnProductosLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(jpnProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2)
+                .addGroup(jpnProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpnProductosLayout.createSequentialGroup()
-                        .addComponent(tareaPro, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24)
+                        .addComponent(txtbuspro, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnbuspro)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnbuscli2)))
+                        .addComponent(btnbuscli2))
+                    .addGroup(jpnProductosLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jpnProductosLayout.setVerticalGroup(
             jpnProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnProductosLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addContainerGap(20, Short.MAX_VALUE)
                 .addGroup(jpnProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tareaPro, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtbuspro, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnbuspro)
                     .addComponent(btnbuscli2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
-                .addGap(83, 83, 83))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jpnFacturacion.setBackground(new java.awt.Color(255, 255, 255));
         jpnFacturacion.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Facturación", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(0, 0, 204))); // NOI18N
 
-        jLabel1.setText("Nombre:");
+        lbNombre.setText("Nombre:");
 
-        jLabel2.setText("Apellido:");
+        lbApellido.setText("Apellido:");
 
-        jLabel3.setText("CI/RUC:");
+        lbRuc.setText("CI/RUC:");
 
-        jLabel4.setText("Dirección:");
+        lbDireccion.setText("Dirección:");
 
-        jLabel5.setText("Teléfono:");
+        lbTelefono.setText("Teléfono:");
 
-        jLabel6.setText("Celular:");
+        lbCelular.setText("Celular:");
 
-        jLabel7.setText("Correo:");
-
-        tareaDetalle.setColumns(20);
-        tareaDetalle.setRows(5);
-        jScrollPane3.setViewportView(tareaDetalle);
+        lbCorreo.setText("Correo:");
 
         btnGuardar.setBackground(new java.awt.Color(51, 255, 0));
         btnGuardar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -215,6 +270,19 @@ public class IngresarFactura extends javax.swing.JFrame {
             }
         });
 
+        tblDetalle.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(tblDetalle);
+
         javax.swing.GroupLayout jpnFacturacionLayout = new javax.swing.GroupLayout(jpnFacturacion);
         jpnFacturacion.setLayout(jpnFacturacionLayout);
         jpnFacturacionLayout.setHorizontalGroup(
@@ -223,59 +291,59 @@ public class IngresarFactura extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jpnFacturacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpnFacturacionLayout.createSequentialGroup()
-                        .addGroup(jpnFacturacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jpnFacturacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbRuc, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jpnFacturacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jpnFacturacionLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 248, Short.MAX_VALUE)
-                                .addGroup(jpnFacturacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel7))
-                                .addGap(208, 208, 208))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jpnFacturacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(lbTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+                                    .addComponent(lbCelular, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lbCorreo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(48, 48, 48))
                             .addGroup(jpnFacturacionLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lbnombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addContainerGap())))
                     .addGroup(jpnFacturacionLayout.createSequentialGroup()
-                        .addComponent(jScrollPane3)
-                        .addContainerGap())))
-            .addGroup(jpnFacturacionLayout.createSequentialGroup()
-                .addGap(106, 106, 106)
-                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jpnFacturacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpnFacturacionLayout.createSequentialGroup()
+                                .addGap(99, 99, 99)
+                                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 579, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jpnFacturacionLayout.setVerticalGroup(
             jpnFacturacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnFacturacionLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jpnFacturacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lbnombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jpnFacturacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel5))
+                    .addComponent(lbApellido)
+                    .addComponent(lbTelefono))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jpnFacturacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel6))
+                    .addComponent(lbRuc)
+                    .addComponent(lbCelular))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jpnFacturacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel7))
-                .addGap(35, 35, 35)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbDireccion)
+                    .addComponent(lbCorreo))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jpnFacturacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(65, 65, 65))
+                .addGap(40, 40, 40))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -293,14 +361,13 @@ public class IngresarFactura extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jpnFacturacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jpnClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jpnProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jpnProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         pack();
@@ -326,8 +393,9 @@ public class IngresarFactura extends javax.swing.JFrame {
         MensajeRQ rq=new MensajeRQ(Originador.getOriginador(Originador.CLIENTE), Mensaje.INFO_CLIENT);
         rq.setCuerpo(inf);
         cliente.flujo(rq.asTexto());
-        
-        tareaCli.setText(cliente.flujoRSc());
+        Object [] arr2=cliente.flujoRSc();
+        modelo.addRow(arr2);
+        //tareaCli.setText(cliente.flujoRSc());
         
     }//GEN-LAST:event_btnbuscliActionPerformed
 
@@ -344,13 +412,33 @@ public class IngresarFactura extends javax.swing.JFrame {
     private void btnbusproActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbusproActionPerformed
         // TODO add your handling code here:
         InformacionProductoRQ inf = new InformacionProductoRQ();
-        inf.setValor(tareaPro.getText());
+        inf.setValor(txtbuspro.getText());
         MensajeRQ rq=new MensajeRQ(Originador.getOriginador(Originador.CLIENTE), Mensaje.INFO_PRODUCT);
         rq.setCuerpo(inf);
         cliente.flujo(rq.asTexto());
+        Object [] arr2=cliente.flujoRSp();
+        modelo.addRow(arr2);
         
-        tareaCli.setText(cliente.flujoRSc());
+       
     }//GEN-LAST:event_btnbusproActionPerformed
+
+    private void btnbuscliMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnbuscliMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnbuscliMouseClicked
+
+    private void tblDatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDatosMouseClicked
+        // TODO add your handling code here:
+        int x=tblDatos.getSelectedRow();
+        lbNombre.setText(lbNombre.getText()+tblDatos.getValueAt(x, 2));
+        lbApellido.setText(lbApellido.getText()+tblDatos.getValueAt(x, 3));
+        lbRuc.setText(lbRuc.getText()+tblDatos.getValueAt(x, 1));
+        lbDireccion.setText(lbDireccion.getText()+tblDatos.getValueAt(x, 4));
+        lbTelefono.setText(lbTelefono.getText()+tblDatos.getValueAt(x, 5));
+        lbCelular.setText(lbCelular.getText()+tblDatos.getValueAt(x, 6));
+        lbCorreo.setText(lbCorreo.getText()+tblDatos.getValueAt(x, 7));
+        
+    }//GEN-LAST:event_tblDatosMouseClicked
 
     /**
      * @param args the command line arguments
@@ -394,25 +482,25 @@ public class IngresarFactura extends javax.swing.JFrame {
     private javax.swing.JButton btnbuscli2;
     private javax.swing.JButton btnbusnuevo;
     private javax.swing.JButton btnbuspro;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JPanel jpnClientes;
     private javax.swing.JPanel jpnFacturacion;
     private javax.swing.JPanel jpnProductos;
+    private javax.swing.JLabel lbApellido;
+    private javax.swing.JLabel lbCelular;
+    private javax.swing.JLabel lbCorreo;
+    private javax.swing.JLabel lbDireccion;
+    private javax.swing.JLabel lbNombre;
+    private javax.swing.JLabel lbRuc;
+    private javax.swing.JLabel lbTelefono;
     private javax.swing.JLabel lbnombre;
-    private javax.swing.JTextArea tareaCli;
-    private javax.swing.JTextArea tareaDetalle;
-    private javax.swing.JTextField tareaPro;
+    private javax.swing.JTable tblDatos;
+    private javax.swing.JTable tblDatosp;
+    private javax.swing.JTable tblDetalle;
     private javax.swing.JTextField txtbuscli;
+    private javax.swing.JTextField txtbuspro;
     // End of variables declaration//GEN-END:variables
 
     public ClienteSocket getCliente() {
