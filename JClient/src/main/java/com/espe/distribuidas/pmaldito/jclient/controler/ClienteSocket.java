@@ -41,6 +41,7 @@ public class ClienteSocket {
         try {
             System.out.println("Mensaje desde Cliente: "+trama);
             output.writeUTF(trama);
+            
         } catch (IOException ex) {
             System.out.println("Error...." + ex);
         }
@@ -50,6 +51,7 @@ public class ClienteSocket {
            
             System.out.println("Mensaje desde Servidor: ");
             String trama=input.readUTF();
+            System.out.println("Mensaje desde Servidor: "+trama);
             if(Mensaje.validaHash(trama)){
                if("OK".equals(trama.substring(85))){
             JOptionPane.showMessageDialog(null, "Ingreso Correcto");
@@ -94,7 +96,7 @@ public class ClienteSocket {
             output.flush();
             String trama=input.readUTF();
             System.out.println("INFO INFOPRODUCTO...." + trama);
-            if(Mensaje.validaHash(trama)){
+            //if(Mensaje.validaHash(trama)){
                 System.out.println("INFO INFOPRODUCTO...." + trama.substring(85,88));
                //if("OKO".equals(trama.substring(85,88))){
                    String [] arr1=trama.split("OKO_");
@@ -105,13 +107,12 @@ public class ClienteSocket {
             JOptionPane.showMessageDialog(null, "Se recibio");
             return arr2;
                //} 
-           }   
+           //}   
         }catch (IOException ex) {
             System.out.println("Error...." + ex);
             JOptionPane.showMessageDialog(null, "Ingreso Incorrecto, intente nuevamente");
             return null;
         }
-        return null;
     }
     
 }
