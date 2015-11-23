@@ -413,6 +413,7 @@ public class IngresarFactura extends javax.swing.JFrame {
         // TODO add your handling code here:
         InformacionProductoRQ inf = new InformacionProductoRQ();
         inf.setValor(txtbuspro.getText());
+        System.out.println(inf);
         MensajeRQ rq=new MensajeRQ(Originador.getOriginador(Originador.CLIENTE), Mensaje.INFO_PRODUCT);
         rq.setCuerpo(inf);
         cliente.flujo(rq.asTexto());
