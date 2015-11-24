@@ -17,6 +17,8 @@ public class IngresarCliente extends javax.swing.JFrame {
      * Creates new form IngresarFactura
      */
     public IngresarCliente() {
+        setUndecorated(true);
+        setOpacity(0.95f);
         initComponents();
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(new java.awt.Color(255,255,255));

@@ -34,8 +34,8 @@ public class LoginView extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(new java.awt.Color(255,255,255));
-        //ImageIcon imageIcon = new ImageIcon(this.getClass().getResource("/org/freedesktop/tango/22x22/actions/address-book-new.png"));
-        //this.setIconImage(imageIcon.getImage());
+        ImageIcon imageIcon = new ImageIcon(this.getClass().getResource("/org/freedesktop/tango/22x22/actions/address-book-new.png"));
+        this.setIconImage(imageIcon.getImage());
         try {
             cliente = new ClienteSocket();
             cliente.conexio();
