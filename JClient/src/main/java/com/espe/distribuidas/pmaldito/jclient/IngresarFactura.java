@@ -8,6 +8,8 @@ import com.espe.distribuidas.pmaldito.originador.Originador;
 import com.espe.distribuidas.pmaldito.pcs.Mensaje;
 import com.espe.distribuidas.pmaldito.pcs.MensajeRQ;
 import com.espe.distribuidas.pmaldito.producto.InformacionProductoRQ;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -25,6 +27,7 @@ public class IngresarFactura extends javax.swing.JFrame {
         setUndecorated(true);
         setOpacity(0.95f);
         initComponents();
+        lbNumeroFactura.setText(this.randon());
         modelo= new DefaultTableModel();
         modelo.addColumn("Tipo");
         modelo.addColumn("Documento");
@@ -35,25 +38,35 @@ public class IngresarFactura extends javax.swing.JFrame {
         modelo.addColumn("Celular");
         modelo.addColumn("Mail");
         modelo.addColumn("Date");
+        
+        
         tblDatos.setModel(modelo);
+        
         modelop= new DefaultTableModel();
         modelop.addColumn("Codigo");
         modelop.addColumn("Nombre");
         modelop.addColumn("Cantidad");
         modelop.addColumn("Precio");
         tblDatosp.setModel(modelop);
+        
+        Object [] pro1={"1234","COCA COLA","10","1.25"};
+        modelop.addRow(pro1);
+        Object [] pro2={"5234","PEPSI","10","1.00"};
+        modelop.addRow(pro2);
+        Object [] pro3={"5274","BIG COLA","10","0.75"};
+        modelop.addRow(pro3);
+
         modelod= new DefaultTableModel();
         modelod.addColumn("Codigo");
-        modelod.addColumn("Codigof");
-        modelod.addColumn("Producto");
         modelod.addColumn("Cantidad");
+        modelod.addColumn("Producto");
         modelod.addColumn("Precio");
-       
         tblDetalle.setModel(modelod);
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(new java.awt.Color(255,255,255));
         ImageIcon imageIcon = new ImageIcon(this.getClass().getResource("/org/freedesktop/tango/22x22/actions/address-book-new.png"));
         this.setIconImage(imageIcon.getImage());
+        
     }
     
     
@@ -95,6 +108,9 @@ public class IngresarFactura extends javax.swing.JFrame {
         lbNombre1 = new javax.swing.JLabel();
         btnbuscli3 = new javax.swing.JButton();
         lbNombre2 = new javax.swing.JLabel();
+        lbNumeroFactura = new javax.swing.JLabel();
+        lbTotal = new javax.swing.JLabel();
+        lbRuc1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -226,6 +242,11 @@ public class IngresarFactura extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblDatosp.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblDatospMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblDatosp);
 
         javax.swing.GroupLayout jpnProductosLayout = new javax.swing.GroupLayout(jpnProductos);
@@ -285,6 +306,11 @@ public class IngresarFactura extends javax.swing.JFrame {
                 btnGuardarMouseClicked(evt);
             }
         });
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setBackground(new java.awt.Color(255, 51, 51));
         btnCancelar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -332,6 +358,16 @@ public class IngresarFactura extends javax.swing.JFrame {
         lbNombre2.setForeground(new java.awt.Color(204, 0, 0));
         lbNombre2.setText("FACTURA #:");
 
+        lbNumeroFactura.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        lbNumeroFactura.setForeground(new java.awt.Color(204, 0, 0));
+        lbNumeroFactura.setText("     ");
+
+        lbTotal.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lbTotal.setForeground(new java.awt.Color(204, 0, 0));
+        lbTotal.setText("0.00");
+
+        lbRuc1.setText("      ");
+
         javax.swing.GroupLayout jpnFacturacionLayout = new javax.swing.GroupLayout(jpnFacturacion);
         jpnFacturacion.setLayout(jpnFacturacionLayout);
         jpnFacturacionLayout.setHorizontalGroup(
@@ -345,16 +381,6 @@ public class IngresarFactura extends javax.swing.JFrame {
                         .addComponent(lbnombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(148, 148, 148))
                     .addGroup(jpnFacturacionLayout.createSequentialGroup()
-                        .addGroup(jpnFacturacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lbApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbRuc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lbDireccion, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jpnFacturacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lbTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lbCelular, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lbCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jpnFacturacionLayout.createSequentialGroup()
                         .addGroup(jpnFacturacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jpnFacturacionLayout.createSequentialGroup()
                                 .addGap(11, 11, 11)
@@ -363,27 +389,51 @@ public class IngresarFactura extends javax.swing.JFrame {
                                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jpnFacturacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 579, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lbNombre2, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnbuscli3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(jpnFacturacionLayout.createSequentialGroup()
-                                    .addGap(192, 192, 192)
-                                    .addComponent(lbNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(btnbuscli3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addComponent(lbNombre2, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(lbNumeroFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jpnFacturacionLayout.createSequentialGroup()
+                                .addGap(371, 371, 371)
+                                .addComponent(lbNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lbTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jpnFacturacionLayout.createSequentialGroup()
+                        .addGroup(jpnFacturacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jpnFacturacionLayout.createSequentialGroup()
+                                .addComponent(lbRuc, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lbRuc1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jpnFacturacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lbTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbCelular, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(114, 114, 114))))
         );
         jpnFacturacionLayout.setVerticalGroup(
             jpnFacturacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnFacturacionLayout.createSequentialGroup()
-                .addComponent(lbNombre2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 36, Short.MAX_VALUE)
                 .addGroup(jpnFacturacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lbNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jpnFacturacionLayout.createSequentialGroup()
+                        .addGroup(jpnFacturacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbNombre2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbNumeroFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(36, 36, 36)
+                        .addComponent(lbNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(lbnombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jpnFacturacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpnFacturacionLayout.createSequentialGroup()
                         .addComponent(lbApellido)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lbRuc)
+                        .addGroup(jpnFacturacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbRuc)
+                            .addComponent(lbRuc1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lbDireccion))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnFacturacionLayout.createSequentialGroup()
@@ -395,7 +445,9 @@ public class IngresarFactura extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(lbNombre1)
+                .addGroup(jpnFacturacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbNombre1)
+                    .addComponent(lbTotal))
                 .addGap(38, 38, 38)
                 .addGroup(jpnFacturacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -491,11 +543,10 @@ public class IngresarFactura extends javax.swing.JFrame {
         // TODO add your handling code here:
         int x=tblDatos.getSelectedRow();
         ////
-        
         ////
         lbNombre.setText("Nombre: "+tblDatos.getValueAt(x, 2));
         lbApellido.setText("Apellido: "+tblDatos.getValueAt(x, 3));
-        lbRuc.setText("CI/RUC: "+tblDatos.getValueAt(x, 1));
+        lbRuc1.setText(""+tblDatos.getValueAt(x, 1));
         lbDireccion.setText("Dirección: "+tblDatos.getValueAt(x, 4));
         lbTelefono.setText("Teléfono: "+tblDatos.getValueAt(x, 5));
         lbCelular.setText("Celular: "+tblDatos.getValueAt(x, 6));
@@ -527,11 +578,22 @@ public class IngresarFactura extends javax.swing.JFrame {
     private void btnGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseClicked
         // TODO add your handling code here:
         IngresarFacturaRQ aurq=new IngresarFacturaRQ();
-        aurq.setCodigoFactura(0001);
-        aurq.setCodigoCLiente("1725412306");
-        aurq.setFechaEmision("20151112020104");
-        aurq.setTotalFactura(10.05);
-        aurq.setCuerpo("1325-0001-cocacola-5-2.5");
+        aurq.setCodigoFactura(Integer.valueOf(lbNumeroFactura.getText()));
+        aurq.setCodigoCLiente(lbRuc1.getText());
+        Calendar c1 = GregorianCalendar.getInstance();
+        String fecha=String.valueOf(c1.get(Calendar.YEAR))+String.valueOf(c1.get(Calendar.MONTH))+String.valueOf(c1.get(Calendar.DATE))+String.valueOf(c1.get(Calendar.HOUR))+String.valueOf(c1.get(Calendar.MINUTE))+String.valueOf(c1.get(Calendar.SECOND));
+        aurq.setFechaEmision(fecha);
+        aurq.setTotalFactura(Double.valueOf(lbTotal.getText()));
+        String cuerpo="";
+        for (int i = 0; i < tblDetalle.getRowCount(); i++) {
+            cuerpo+=tblDetalle.getValueAt(i, 0).toString()+"-"+lbNumeroFactura.getText()+"-"+tblDetalle.getValueAt(i, 2)
++"-"+tblDetalle.getValueAt(i, 1)+"-"+tblDetalle.getValueAt(i, 3)+"_";
+        }
+        cuerpo=cuerpo.substring(0, cuerpo.length()-1);
+        //aurq.setCuerpo("1325-0001-cocacola-5-2.5_1325-0001-cocacola-5-2.5_1325-0001-cocacola-5-2.5");
+        System.out.print(cuerpo);
+        aurq.setCuerpo(cuerpo);
+        
         MensajeRQ rq=new MensajeRQ(Originador.getOriginador(Originador.CLIENTE), Mensaje.INSERT_FACT);
         rq.setCuerpo(aurq);
         cliente.flujo(rq.asTexto());
@@ -544,6 +606,32 @@ public class IngresarFactura extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error, intente nuevamente");
         }
     }//GEN-LAST:event_btnGuardarMouseClicked
+
+    private void tblDatospMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDatospMouseClicked
+        int x=tblDatosp.getSelectedRow();
+        ////
+        ////
+        Object [] datos=new Object[4];
+        datos[0]=tblDatosp.getValueAt(x, 0);
+        datos[1]="1";
+        datos[2]=tblDatosp.getValueAt(x, 1);
+        datos[3]=tblDatosp.getValueAt(x, 3);
+        modelod.addRow(datos);
+        double sum=0.00;
+        for (int i = 0; i < tblDetalle.getRowCount(); i++) {
+            sum=Double.parseDouble(lbTotal.getText())+Double.parseDouble(tblDetalle.getValueAt(i, 3).toString());
+            
+        }
+        lbTotal.setText(String.valueOf(sum));
+        
+        
+        
+        
+    }//GEN-LAST:event_tblDatospMouseClicked
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -579,6 +667,11 @@ public class IngresarFactura extends javax.swing.JFrame {
             }
         });
     }
+    
+    public String randon ()
+    {
+        return String.valueOf((int)(Math.random()*1000 + 1));
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
@@ -601,8 +694,11 @@ public class IngresarFactura extends javax.swing.JFrame {
     private javax.swing.JLabel lbNombre;
     private javax.swing.JLabel lbNombre1;
     private javax.swing.JLabel lbNombre2;
+    private javax.swing.JLabel lbNumeroFactura;
     private javax.swing.JLabel lbRuc;
+    private javax.swing.JLabel lbRuc1;
     private javax.swing.JLabel lbTelefono;
+    private javax.swing.JLabel lbTotal;
     private javax.swing.JLabel lbnombre;
     private javax.swing.JTable tblDatos;
     private javax.swing.JTable tblDatosp;

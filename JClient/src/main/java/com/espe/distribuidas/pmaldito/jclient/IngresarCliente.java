@@ -259,7 +259,7 @@ public class IngresarCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
          //SendRQ send = new SendRQ();
         IngresarClienteRQ aurq=new IngresarClienteRQ();
-        aurq.setTipoDocumento("CEDUL");
+        aurq.setTipoDocumento(jtipo.getSelectedItem().toString());
         aurq.setValorDocumento(txtval.getText());
         aurq.setNombre(txtnom.getText());
         aurq.setApellido(txtape.getText());
@@ -267,7 +267,7 @@ public class IngresarCliente extends javax.swing.JFrame {
         aurq.setNumeroTelefono(txttef.getText());
         aurq.setNumeroMovil(txtcel.getText());
         aurq.setCorreo(txtcorr.getText());
-        aurq.setFechaNacimiento("20150107");
+        aurq.setFechaNacimiento(janio.getSelectedItem().toString()+jmes.getSelectedItem().toString()+jdia.getSelectedItem().toString());
         MensajeRQ rq=new MensajeRQ(Originador.getOriginador(Originador.CLIENTE), Mensaje.INSERT_CLIENT);
         rq.setCuerpo(aurq);
         cliente.flujo(rq.asTexto());

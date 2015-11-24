@@ -21,7 +21,7 @@ import javax.swing.JOptionPane;
  */
 public class ClienteSocket {
 
-    private static final String IP = "192.168.137.115";
+    private static final String IP = "localhost";
     DataInputStream input = null;
     DataOutputStream output = null;
     Socket comunicacion = null;
