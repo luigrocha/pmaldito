@@ -10,6 +10,7 @@ package com.espe.distribuidas.pmaldito.jclient.controler;
  * @author Luig Rocha
  */
 public class Factura {
+
     private String codigo;
     private String codigocli;
     private String fecha;
@@ -56,5 +57,5 @@ public class Factura {
 
     public Factura() {
     }
-    
+
 }

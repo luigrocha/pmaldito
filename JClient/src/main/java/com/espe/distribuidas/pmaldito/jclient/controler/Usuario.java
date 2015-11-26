@@ -10,6 +10,7 @@ package com.espe.distribuidas.pmaldito.jclient.controler;
  * @author Luig Rocha
  */
 public class Usuario {
+
     private String usuario;
     private String clave;
 
@@ -36,5 +37,5 @@ public class Usuario {
     public void setClave(String clave) {
         this.clave = clave;
     }
-    
+
 }

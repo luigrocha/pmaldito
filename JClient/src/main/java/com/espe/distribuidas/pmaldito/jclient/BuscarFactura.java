@@ -8,11 +8,12 @@ import com.espe.distribuidas.pmaldito.pcs.MensajeRQ;
 import com.espe.distribuidas.pmaldito.producto.InformacionProductoRQ;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
+
 public class BuscarFactura extends javax.swing.JFrame {
+
     private ClienteSocket cliente;
-    
+
     DefaultTableModel modelof;
-    
 
     /**
      * Creates new form IngresarFactura
@@ -21,14 +22,14 @@ public class BuscarFactura extends javax.swing.JFrame {
         setUndecorated(true);
         setOpacity(0.95f);
         initComponents();
-        modelof= new DefaultTableModel();
+        modelof = new DefaultTableModel();
         modelof.addColumn("NumeroFact");
         modelof.addColumn("FechaFact");
         modelof.addColumn("Valor");
-        
+
         tblDatos.setModel(modelof);
         this.setLocationRelativeTo(null);
-        this.getContentPane().setBackground(new java.awt.Color(255,255,255));
+        this.getContentPane().setBackground(new java.awt.Color(255, 255, 255));
         ImageIcon imageIcon = new ImageIcon(this.getClass().getResource("/org/freedesktop/tango/22x22/actions/address-book-new.png"));
         this.setIconImage(imageIcon.getImage());
     }
@@ -159,7 +160,7 @@ public class BuscarFactura extends javax.swing.JFrame {
 
     private void btnbusnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbusnuevoActionPerformed
         // TODO add your handling code here:
-        IngresarCliente ingcli= new IngresarCliente();
+        IngresarCliente ingcli = new IngresarCliente();
         ingcli.setCliente(cliente);
         ingcli.setVisible(true);
         this.setVisible(false);
@@ -169,13 +170,13 @@ public class BuscarFactura extends javax.swing.JFrame {
         // TODO add your handling code here:
         InformacionClienteRQ inf = new InformacionClienteRQ();
         inf.setValor(txtbuscli.getText());
-        MensajeRQ rq=new MensajeRQ(Originador.getOriginador(Originador.CLIENTE), Mensaje.INFO_CLIENT);
+        MensajeRQ rq = new MensajeRQ(Originador.getOriginador(Originador.CLIENTE), Mensaje.INFO_CLIENT);
         rq.setCuerpo(inf);
         cliente.flujo(rq.asTexto());
-        Object [] arr2=cliente.flujoRSc();
+        Object[] arr2 = cliente.flujoRSc();
         //modelo.addRow(arr2);
         //tareaCli.setText(cliente.flujoRSc());
-        
+
     }//GEN-LAST:event_btnbuscliActionPerformed
 
     private void txtbuscliFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtbuscliFocusGained
@@ -185,29 +186,29 @@ public class BuscarFactura extends javax.swing.JFrame {
 
     private void txtbuscliFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtbuscliFocusLost
         // TODO add your handling code here:
-       //txtbuscli.setText("Ingrese ID CLIENTE");
+        //txtbuscli.setText("Ingrese ID CLIENTE");
     }//GEN-LAST:event_txtbuscliFocusLost
 
     private void btnbuscliMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnbuscliMouseClicked
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_btnbuscliMouseClicked
 
     private void tblDatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDatosMouseClicked
         // TODO add your handling code here:
-        int x=tblDatos.getSelectedRow();
-/*        lbNombre.setText(lbNombre.getText()+tblDatos.getValueAt(x, 2));
-        lbApellido.setText(lbApellido.getText()+tblDatos.getValueAt(x, 3));
-        lbRuc.setText(lbRuc.getText()+tblDatos.getValueAt(x, 1));
-        lbDireccion.setText(lbDireccion.getText()+tblDatos.getValueAt(x, 4));
-        lbTelefono.setText(lbTelefono.getText()+tblDatos.getValueAt(x, 5));
-        lbCelular.setText(lbCelular.getText()+tblDatos.getValueAt(x, 6));
-        lbCorreo.setText(lbCorreo.getText()+tblDatos.getValueAt(x, 7));*/
+        int x = tblDatos.getSelectedRow();
+        /*        lbNombre.setText(lbNombre.getText()+tblDatos.getValueAt(x, 2));
+         lbApellido.setText(lbApellido.getText()+tblDatos.getValueAt(x, 3));
+         lbRuc.setText(lbRuc.getText()+tblDatos.getValueAt(x, 1));
+         lbDireccion.setText(lbDireccion.getText()+tblDatos.getValueAt(x, 4));
+         lbTelefono.setText(lbTelefono.getText()+tblDatos.getValueAt(x, 5));
+         lbCelular.setText(lbCelular.getText()+tblDatos.getValueAt(x, 6));
+         lbCorreo.setText(lbCorreo.getText()+tblDatos.getValueAt(x, 7));*/
     }//GEN-LAST:event_tblDatosMouseClicked
 
     private void btnbusnuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnbusnuevoMouseClicked
         // TODO add your handling code here:
-        IngresarFactura fact= new IngresarFactura();
+        IngresarFactura fact = new IngresarFactura();
         fact.setCliente(cliente);
         fact.setVisible(true);
         this.setVisible(false);

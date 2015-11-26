@@ -22,7 +22,7 @@ import javax.swing.JOptionPane;
  * @author david
  */
 public class LoginView extends javax.swing.JFrame {
-    
+
     public ClienteSocket cliente;
 
     /**
@@ -33,7 +33,7 @@ public class LoginView extends javax.swing.JFrame {
         setOpacity(0.95f);
         initComponents();
         this.setLocationRelativeTo(null);
-        this.getContentPane().setBackground(new java.awt.Color(255,255,255));
+        this.getContentPane().setBackground(new java.awt.Color(255, 255, 255));
         ImageIcon imageIcon = new ImageIcon(this.getClass().getResource("/org/freedesktop/tango/22x22/actions/address-book-new.png"));
         this.setIconImage(imageIcon.getImage());
         try {
@@ -153,16 +153,16 @@ public class LoginView extends javax.swing.JFrame {
     private void btnenviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnenviarActionPerformed
         // TODO add your handling code here:
         SendRQ send = new SendRQ();
-        cliente.flujo(send.construirMs(new Usuario(txtusuario.getText(),txtClave.getText())));
-        if(cliente.flujoRS()){
+        cliente.flujo(send.construirMs(new Usuario(txtusuario.getText(), txtClave.getText())));
+        if (cliente.flujoRS()) {
             this.setVisible(false);
             IngresarFactura fact = new IngresarFactura();
             fact.setCliente(cliente);
             fact.setVisible(true);
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Error, intente nuevamente");
         }
-        
+
     }//GEN-LAST:event_btnenviarActionPerformed
 
     private void btncerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncerrarActionPerformed

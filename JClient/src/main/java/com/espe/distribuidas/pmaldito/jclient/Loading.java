@@ -1,36 +1,42 @@
 package com.espe.distribuidas.pmaldito.jclient;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+
 /**
  *
  * @author LuigRocha
  */
-public class Loading  extends javax.swing.JFrame implements Runnable  {
+public class Loading extends javax.swing.JFrame implements Runnable {
+
     Thread t;
+
     public Loading() {
         setUndecorated(true);
         setOpacity(0.95f);
         initComponents();
         this.setLocationRelativeTo(null);
-        this.getContentPane().setBackground(new java.awt.Color(255,255,255));
+        this.getContentPane().setBackground(new java.awt.Color(255, 255, 255));
         ImageIcon imageIcon = new ImageIcon(this.getClass().getResource("/org/freedesktop/tango/22x22/actions/address-book-new.png"));
         this.setIconImage(imageIcon.getImage());
-        
+
     }
+
     @Override
     public void run() {
-        try {       
+        try {
             t.sleep(1800);
             this.dispose();
-           LoginView login = new LoginView();
+            LoginView login = new LoginView();
             login.setLocationRelativeTo(null);
             login.setVisible(true);
-            
+
         } catch (InterruptedException ex) {
             Logger.getLogger(Loading.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

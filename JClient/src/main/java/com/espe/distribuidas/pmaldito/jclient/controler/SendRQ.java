@@ -16,16 +16,18 @@ import com.espe.distribuidas.pmaldito.seguridad.AutenticacionRQ;
  * @author Luig Rocha
  */
 public class SendRQ {
-    public String construirMs(Usuario usu){
-        AutenticacionRQ aurq=new AutenticacionRQ();
+
+    public String construirMs(Usuario usu) {
+        AutenticacionRQ aurq = new AutenticacionRQ();
         aurq.setUsuario(usu.getUsuario());
         aurq.setClave(usu.getClave());
-        MensajeRQ rq=new MensajeRQ(Originador.getOriginador(Originador.CLIENTE), Mensaje.AUTENTIC_USER);
+        MensajeRQ rq = new MensajeRQ(Originador.getOriginador(Originador.CLIENTE), Mensaje.AUTENTIC_USER);
         rq.setCuerpo(aurq);
         return rq.asTexto();
     }
-    public String construirMsC(Cliente cli){
-        IngresarClienteRQ aurq=new IngresarClienteRQ();
+
+    public String construirMsC(Cliente cli) {
+        IngresarClienteRQ aurq = new IngresarClienteRQ();
         aurq.setTipoDocumento(cli.getTipo());
         aurq.setValorDocumento(cli.getDoc());
         aurq.setNombre(cli.getNombre());
@@ -35,10 +37,10 @@ public class SendRQ {
         aurq.setNumeroMovil(cli.getCelular());
         aurq.setCorreo(cli.getCorreo());
         aurq.setFechaNacimiento(cli.getNacimiento());
-        MensajeRQ rq=new MensajeRQ(Originador.getOriginador(Originador.CLIENTE), Mensaje.AUTENTIC_USER);
+        MensajeRQ rq = new MensajeRQ(Originador.getOriginador(Originador.CLIENTE), Mensaje.AUTENTIC_USER);
         rq.setCuerpo(aurq);
         System.out.print(rq);
         return rq.asTexto();
     }
-    
+
 }

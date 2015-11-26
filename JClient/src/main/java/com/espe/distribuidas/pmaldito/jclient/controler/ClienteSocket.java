@@ -131,4 +131,37 @@ public class ClienteSocket {
         return null;
     }
 
+    public String[] flujoRSf() {
+        try {
+            System.out.println("Mensaje desde INFOFACTURA:");
+            output.flush();
+            String trama = input.readUTF();
+            System.out.println("INFOFACTURA...." + trama);
+            if (Mensaje.validaHash(trama)) {
+                System.out.println("INFOFACTURA...." + trama.substring(85, 88));
+                if ("BAD".equals(trama.substring(85, 88))) {
+                    JOptionPane.showMessageDialog(null, "No exite factura");
+                }
+                System.out.println("AQUI...." + trama.substring(85, 88));
+                if ("OKO".equals(trama.substring(85, 88))) {
+                    // if("OKO".equals(trama.substring(85,88))){
+                    String[] arr1 = trama.split("OKO_");
+                    String[] arr2 = arr1[1].split("-");
+                    for (int i = 0; i < arr2.length; i++) {
+                        System.out.println(arr2[i]);
+                    }
+                    JOptionPane.showMessageDialog(null, "Se encotro el registro!");
+                    return arr2;
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "No hay registros, ingrese un nuevo cliente!");
+            }
+        } catch (IOException ex) {
+            System.out.println("Error...." + ex);
+            JOptionPane.showMessageDialog(null, "Ingreso Incorrecto, intente nuevamente");
+            return null;
+        }
+        return null;
+    }
+
 }

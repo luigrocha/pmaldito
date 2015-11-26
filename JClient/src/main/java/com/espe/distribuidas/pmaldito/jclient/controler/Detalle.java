@@ -10,6 +10,7 @@ package com.espe.distribuidas.pmaldito.jclient.controler;
  * @author Luig Rocha
  */
 public class Detalle {
+
     private String codigopro;
     private String codigofac;
     private String nombrepro;
@@ -66,6 +67,5 @@ public class Detalle {
 
     public Detalle() {
     }
-    
-    
+
 }

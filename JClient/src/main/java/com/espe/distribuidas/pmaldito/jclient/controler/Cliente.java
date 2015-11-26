@@ -10,6 +10,7 @@ package com.espe.distribuidas.pmaldito.jclient.controler;
  * @author Luig Rocha
  */
 public class Cliente {
+
     private String tipo;
     private String doc;
     private String nombre;
@@ -106,6 +107,5 @@ public class Cliente {
     public void setNacimiento(String nacimiento) {
         this.nacimiento = nacimiento;
     }
-    
-    
+
 }

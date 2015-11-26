@@ -13,9 +13,11 @@ import java.util.GregorianCalendar;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+
 public class IngresarFactura extends javax.swing.JFrame {
+
     private ClienteSocket cliente;
-    
+
     DefaultTableModel modelo;
     DefaultTableModel modelop;
     DefaultTableModel modelod;
@@ -28,7 +30,7 @@ public class IngresarFactura extends javax.swing.JFrame {
         setOpacity(0.95f);
         initComponents();
         lbNumeroFactura.setText(this.randon());
-        modelo= new DefaultTableModel();
+        modelo = new DefaultTableModel();
         modelo.addColumn("Tipo");
         modelo.addColumn("Documento");
         modelo.addColumn("Nombre");
@@ -38,38 +40,35 @@ public class IngresarFactura extends javax.swing.JFrame {
         modelo.addColumn("Celular");
         modelo.addColumn("Mail");
         modelo.addColumn("Date");
-        
-        
+
         tblDatos.setModel(modelo);
-        
-        modelop= new DefaultTableModel();
+
+        modelop = new DefaultTableModel();
         modelop.addColumn("Codigo");
         modelop.addColumn("Nombre");
         modelop.addColumn("Cantidad");
         modelop.addColumn("Precio");
         tblDatosp.setModel(modelop);
-        
-        Object [] pro1={"1234","COCA COLA","10","1.25"};
+
+        Object[] pro1 = {"1234", "COCA COLA", "10", "1.25"};
         modelop.addRow(pro1);
-        Object [] pro2={"5234","PEPSI","10","1.00"};
+        Object[] pro2 = {"5234", "PEPSI", "10", "1.00"};
         modelop.addRow(pro2);
-        Object [] pro3={"5274","BIG COLA","10","0.75"};
+        Object[] pro3 = {"5274", "BIG COLA", "10", "0.75"};
         modelop.addRow(pro3);
 
-        modelod= new DefaultTableModel();
+        modelod = new DefaultTableModel();
         modelod.addColumn("Codigo");
         modelod.addColumn("Cantidad");
         modelod.addColumn("Producto");
         modelod.addColumn("Precio");
         tblDetalle.setModel(modelod);
         this.setLocationRelativeTo(null);
-        this.getContentPane().setBackground(new java.awt.Color(255,255,255));
+        this.getContentPane().setBackground(new java.awt.Color(255, 255, 255));
         ImageIcon imageIcon = new ImageIcon(this.getClass().getResource("/org/freedesktop/tango/22x22/actions/address-book-new.png"));
         this.setIconImage(imageIcon.getImage());
-        
+
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -486,7 +485,7 @@ public class IngresarFactura extends javax.swing.JFrame {
 
     private void btnbusnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbusnuevoActionPerformed
         // TODO add your handling code here:
-        IngresarCliente ingcli= new IngresarCliente();
+        IngresarCliente ingcli = new IngresarCliente();
         ingcli.setCliente(cliente);
         ingcli.setVisible(true);
         this.setVisible(false);
@@ -501,13 +500,13 @@ public class IngresarFactura extends javax.swing.JFrame {
         // TODO add your handling code here:
         InformacionClienteRQ inf = new InformacionClienteRQ();
         inf.setValor(txtbuscli.getText());
-        MensajeRQ rq=new MensajeRQ(Originador.getOriginador(Originador.CLIENTE), Mensaje.INFO_CLIENT);
+        MensajeRQ rq = new MensajeRQ(Originador.getOriginador(Originador.CLIENTE), Mensaje.INFO_CLIENT);
         rq.setCuerpo(inf);
         cliente.flujo(rq.asTexto());
-        Object [] arr2=cliente.flujoRSc();
+        Object[] arr2 = cliente.flujoRSc();
         modelo.addRow(arr2);
         //tareaCli.setText(cliente.flujoRSc());
-        
+
     }//GEN-LAST:event_btnbuscliActionPerformed
 
     private void txtbuscliFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtbuscliFocusGained
@@ -517,7 +516,7 @@ public class IngresarFactura extends javax.swing.JFrame {
 
     private void txtbuscliFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtbuscliFocusLost
         // TODO add your handling code here:
-       //txtbuscli.setText("Ingrese ID CLIENTE");
+        //txtbuscli.setText("Ingrese ID CLIENTE");
     }//GEN-LAST:event_txtbuscliFocusLost
 
     private void btnbusproActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbusproActionPerformed
@@ -525,33 +524,33 @@ public class IngresarFactura extends javax.swing.JFrame {
         InformacionProductoRQ inf = new InformacionProductoRQ();
         inf.setValor(txtbuspro.getText());
         System.out.println(inf);
-        MensajeRQ rq=new MensajeRQ(Originador.getOriginador(Originador.CLIENTE), Mensaje.INFO_PRODUCT);
+        MensajeRQ rq = new MensajeRQ(Originador.getOriginador(Originador.CLIENTE), Mensaje.INFO_PRODUCT);
         rq.setCuerpo(inf);
         cliente.flujo(rq.asTexto());
-        Object [] arr2=cliente.flujoRSp();
+        Object[] arr2 = cliente.flujoRSp();
         modelop.addRow(arr2);
-        
-       
+
+
     }//GEN-LAST:event_btnbusproActionPerformed
 
     private void btnbuscliMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnbuscliMouseClicked
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_btnbuscliMouseClicked
 
     private void tblDatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDatosMouseClicked
         // TODO add your handling code here:
-        int x=tblDatos.getSelectedRow();
+        int x = tblDatos.getSelectedRow();
         ////
         ////
-        lbNombre.setText("Nombre: "+tblDatos.getValueAt(x, 2));
-        lbApellido.setText("Apellido: "+tblDatos.getValueAt(x, 3));
-        lbRuc1.setText(""+tblDatos.getValueAt(x, 1));
-        lbDireccion.setText("Dirección: "+tblDatos.getValueAt(x, 4));
-        lbTelefono.setText("Teléfono: "+tblDatos.getValueAt(x, 5));
-        lbCelular.setText("Celular: "+tblDatos.getValueAt(x, 6));
-        lbCorreo.setText("Correo: "+tblDatos.getValueAt(x, 7));
-        
+        lbNombre.setText("Nombre: " + tblDatos.getValueAt(x, 2));
+        lbApellido.setText("Apellido: " + tblDatos.getValueAt(x, 3));
+        lbRuc1.setText("" + tblDatos.getValueAt(x, 1));
+        lbDireccion.setText("Dirección: " + tblDatos.getValueAt(x, 4));
+        lbTelefono.setText("Teléfono: " + tblDatos.getValueAt(x, 5));
+        lbCelular.setText("Celular: " + tblDatos.getValueAt(x, 6));
+        lbCorreo.setText("Correo: " + tblDatos.getValueAt(x, 7));
+
     }//GEN-LAST:event_tblDatosMouseClicked
 
     private void txtbusproActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbusproActionPerformed
@@ -565,7 +564,7 @@ public class IngresarFactura extends javax.swing.JFrame {
 
     private void btnbuscli3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnbuscli3MouseClicked
         // TODO add your handling code here:
-        BuscarFactura buscli= new BuscarFactura();
+        BuscarFacturaNumerofact buscli = new BuscarFacturaNumerofact();
         buscli.setCliente(cliente);
         buscli.setVisible(true);
         this.setVisible(false);
@@ -577,56 +576,54 @@ public class IngresarFactura extends javax.swing.JFrame {
 
     private void btnGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseClicked
         // TODO add your handling code here:
-        IngresarFacturaRQ aurq=new IngresarFacturaRQ();
+        IngresarFacturaRQ aurq = new IngresarFacturaRQ();
         aurq.setCodigoFactura(Integer.valueOf(lbNumeroFactura.getText()));
         aurq.setCodigoCLiente(lbRuc1.getText());
         Calendar c1 = GregorianCalendar.getInstance();
-        String fecha=String.valueOf(c1.get(Calendar.YEAR))+String.valueOf(c1.get(Calendar.MONTH))+String.valueOf(c1.get(Calendar.DATE))+String.valueOf(c1.get(Calendar.HOUR))+String.valueOf(c1.get(Calendar.MINUTE))+String.valueOf(c1.get(Calendar.SECOND));
+        String fecha = String.valueOf(c1.get(Calendar.YEAR)) + String.valueOf(c1.get(Calendar.MONTH)) + String.valueOf(c1.get(Calendar.DATE)) + String.valueOf(c1.get(Calendar.HOUR)) + String.valueOf(c1.get(Calendar.MINUTE)) + String.valueOf(c1.get(Calendar.SECOND));
         aurq.setFechaEmision(fecha);
         aurq.setTotalFactura(Double.valueOf(lbTotal.getText()));
-        String cuerpo="";
+        String cuerpo = "";
         for (int i = 0; i < tblDetalle.getRowCount(); i++) {
-            cuerpo+=tblDetalle.getValueAt(i, 0).toString()+"-"+lbNumeroFactura.getText()+"-"+tblDetalle.getValueAt(i, 2)
-+"-"+tblDetalle.getValueAt(i, 1)+"-"+tblDetalle.getValueAt(i, 3)+"_";
+            cuerpo += tblDetalle.getValueAt(i, 0).toString() + "-" + lbNumeroFactura.getText() + "-" + tblDetalle.getValueAt(i, 2)
+                    + "-" + tblDetalle.getValueAt(i, 1) + "-" + tblDetalle.getValueAt(i, 3) + "_";
         }
-        cuerpo=cuerpo.substring(0, cuerpo.length()-1);
+        cuerpo = cuerpo.substring(0, cuerpo.length() - 1);
         //aurq.setCuerpo("1325-0001-cocacola-5-2.5_1325-0001-cocacola-5-2.5_1325-0001-cocacola-5-2.5");
         System.out.print(cuerpo);
         aurq.setCuerpo(cuerpo);
-        
-        MensajeRQ rq=new MensajeRQ(Originador.getOriginador(Originador.CLIENTE), Mensaje.INSERT_FACT);
+
+        MensajeRQ rq = new MensajeRQ(Originador.getOriginador(Originador.CLIENTE), Mensaje.INSERT_FACT);
         rq.setCuerpo(aurq);
         cliente.flujo(rq.asTexto());
-        
-        if(cliente.flujoRS()){
-           /* this.setVisible(false);
-            IngresarFactura fact = new IngresarFactura();
-            fact.setVisible(true);*/
-        }else{
+
+        if (cliente.flujoRS()) {
+            /* this.setVisible(false);
+             IngresarFactura fact = new IngresarFactura();
+             fact.setVisible(true);*/
+        } else {
             JOptionPane.showMessageDialog(null, "Error, intente nuevamente");
         }
     }//GEN-LAST:event_btnGuardarMouseClicked
 
     private void tblDatospMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDatospMouseClicked
-        int x=tblDatosp.getSelectedRow();
+        int x = tblDatosp.getSelectedRow();
         ////
         ////
-        Object [] datos=new Object[4];
-        datos[0]=tblDatosp.getValueAt(x, 0);
-        datos[1]="1";
-        datos[2]=tblDatosp.getValueAt(x, 1);
-        datos[3]=tblDatosp.getValueAt(x, 3);
+        Object[] datos = new Object[4];
+        datos[0] = tblDatosp.getValueAt(x, 0);
+        datos[1] = "1";
+        datos[2] = tblDatosp.getValueAt(x, 1);
+        datos[3] = tblDatosp.getValueAt(x, 3);
         modelod.addRow(datos);
-        double sum=0.00;
+        double sum = 0.00;
         for (int i = 0; i < tblDetalle.getRowCount(); i++) {
-            sum=Double.parseDouble(lbTotal.getText())+Double.parseDouble(tblDetalle.getValueAt(i, 3).toString());
-            
+            sum = Double.parseDouble(lbTotal.getText()) + Double.parseDouble(tblDetalle.getValueAt(i, 3).toString());
+
         }
         lbTotal.setText(String.valueOf(sum));
-        
-        
-        
-        
+
+
     }//GEN-LAST:event_tblDatospMouseClicked
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
@@ -667,10 +664,9 @@ public class IngresarFactura extends javax.swing.JFrame {
             }
         });
     }
-    
-    public String randon ()
-    {
-        return String.valueOf((int)(Math.random()*1000 + 1));
+
+    public String randon() {
+        return String.valueOf((int) (Math.random() * 1000 + 1));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

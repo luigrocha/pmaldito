@@ -10,7 +10,9 @@ import com.espe.distribuidas.pmaldito.pcs.Mensaje;
 import com.espe.distribuidas.pmaldito.pcs.MensajeRQ;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+
 public class IngresarCliente extends javax.swing.JFrame {
+
     private ClienteSocket cliente;
 
     /**
@@ -21,13 +23,12 @@ public class IngresarCliente extends javax.swing.JFrame {
         setOpacity(0.95f);
         initComponents();
         this.setLocationRelativeTo(null);
-        this.getContentPane().setBackground(new java.awt.Color(255,255,255));
+        this.getContentPane().setBackground(new java.awt.Color(255, 255, 255));
         ImageIcon imageIcon = new ImageIcon(this.getClass().getResource("/org/freedesktop/tango/22x22/actions/address-book-new.png"));
         this.setIconImage(imageIcon.getImage());
-        
+
     }
 
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -251,14 +252,14 @@ public class IngresarCliente extends javax.swing.JFrame {
     private void btnbuscli1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscli1ActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        IngresarFactura fact= new IngresarFactura();
+        IngresarFactura fact = new IngresarFactura();
         fact.setVisible(true);
     }//GEN-LAST:event_btnbuscli1ActionPerformed
 
     private void btnbuscliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscliActionPerformed
         // TODO add your handling code here:
-         //SendRQ send = new SendRQ();
-        IngresarClienteRQ aurq=new IngresarClienteRQ();
+        //SendRQ send = new SendRQ();
+        IngresarClienteRQ aurq = new IngresarClienteRQ();
         aurq.setTipoDocumento(jtipo.getSelectedItem().toString());
         aurq.setValorDocumento(txtval.getText());
         aurq.setNombre(txtnom.getText());
@@ -267,24 +268,24 @@ public class IngresarCliente extends javax.swing.JFrame {
         aurq.setNumeroTelefono(txttef.getText());
         aurq.setNumeroMovil(txtcel.getText());
         aurq.setCorreo(txtcorr.getText());
-        aurq.setFechaNacimiento(janio.getSelectedItem().toString()+jmes.getSelectedItem().toString()+jdia.getSelectedItem().toString());
-        MensajeRQ rq=new MensajeRQ(Originador.getOriginador(Originador.CLIENTE), Mensaje.INSERT_CLIENT);
+        aurq.setFechaNacimiento(janio.getSelectedItem().toString() + jmes.getSelectedItem().toString() + jdia.getSelectedItem().toString());
+        MensajeRQ rq = new MensajeRQ(Originador.getOriginador(Originador.CLIENTE), Mensaje.INSERT_CLIENT);
         rq.setCuerpo(aurq);
         cliente.flujo(rq.asTexto());
-        
-        if(cliente.flujoRS()){
-           /* this.setVisible(false);
-            IngresarFactura fact = new IngresarFactura();
-            fact.setVisible(true);*/
-        }else{
+
+        if (cliente.flujoRS()) {
+            /* this.setVisible(false);
+             IngresarFactura fact = new IngresarFactura();
+             fact.setVisible(true);*/
+        } else {
             JOptionPane.showMessageDialog(null, "Error, intente nuevamente");
         }
-        
+
     }//GEN-LAST:event_btnbuscliActionPerformed
 
     private void btnbuscliMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnbuscliMouseClicked
         // TODO add your handling code here:
-        IngresarClienteRQ aurq=new IngresarClienteRQ();
+        IngresarClienteRQ aurq = new IngresarClienteRQ();
         aurq.setTipoDocumento("CEDUL");
         aurq.setValorDocumento(txtval.getText());
         aurq.setNombre(txtnom.getText());
@@ -294,12 +295,12 @@ public class IngresarCliente extends javax.swing.JFrame {
         aurq.setNumeroMovil(txtcel.getText());
         aurq.setCorreo(txtcorr.getText());
         aurq.setFechaNacimiento("2015-01-07");
-        MensajeRQ rq=new MensajeRQ(Originador.getOriginador(Originador.CLIENTE), Mensaje.AUTENTIC_USER);
+        MensajeRQ rq = new MensajeRQ(Originador.getOriginador(Originador.CLIENTE), Mensaje.AUTENTIC_USER);
         rq.setCuerpo(aurq);
         System.out.print(rq.asTexto());
         cliente.flujo(rq.asTexto());
-        
-        
+
+
     }//GEN-LAST:event_btnbuscliMouseClicked
 
     /**

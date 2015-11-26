@@ -10,6 +10,7 @@ package com.espe.distribuidas.pmaldito.jclient.controler;
  * @author Luig Rocha
  */
 public class Producto {
+
     private String codigo;
     private String nombre;
     private String cantidad;
@@ -56,5 +57,5 @@ public class Producto {
         this.costo = costo;
     }
     private String costo;
-    
+
 }
